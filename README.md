@@ -1,191 +1,174 @@
-Overview
+# EEG-Based Alzheimer’s Disease Detection using Signal Processing and SVM (MATLAB)
 
-This project presents a signal processing and machine learning framework for the automated detection of Alzheimer’s Disease (AD) using Electroencephalography (EEG) signals. The system analyzes EEG recordings by decomposing them into standard frequency bands, extracting statistical features, and classifying subjects using a Support Vector Machine (SVM) classifier.
+## Overview
 
-The objective is to develop a computationally efficient and reliable diagnostic pipeline using digital signal processing (DSP) techniques and MATLAB-based implementation.
+This project implements a digital signal processing (DSP) and machine learning pipeline for automated detection of Alzheimer’s Disease (AD) using EEG signals. The system processes EEG recordings, decomposes them into standard frequency bands using FIR band-pass filters, extracts Hjorth parameters as features, and classifies subjects using a Support Vector Machine (SVM).
 
-Motivation
+The implementation is developed in MATLAB with focus on computational efficiency and hardware-compatible signal processing techniques relevant to FPGA and semiconductor systems.
 
-Alzheimer’s Disease is a progressive neurodegenerative disorder that affects brain function, memory, and cognition. EEG provides a non-invasive and cost-effective method to analyze brain activity. Alzheimer’s patients exhibit characteristic changes in EEG signals, particularly slowing of brain rhythms and altered signal complexity.
+---
 
-This project leverages signal processing and machine learning techniques to detect these changes automatically.
+## Objectives
 
-Methodology
+- Process EEG signals using digital signal processing techniques  
+- Decompose EEG into frequency bands using FIR band-pass filters  
+- Extract statistical features using Hjorth parameters  
+- Train and evaluate an SVM classifier  
+- Develop a complete signal processing and classification pipeline  
 
-The implementation consists of four main stages:
+---
 
-1. Signal Acquisition and Preprocessing
+## System Workflow
 
-EEG dataset includes recordings from Alzheimer’s patients and healthy control subjects.
+EEG Signal  
+→ Preprocessing  
+→ FIR Band-pass Filtering  
+→ Frequency Band Decomposition  
+→ Feature Extraction (Hjorth Parameters)  
+→ Feature Vector Generation  
+→ SVM Classification  
+→ Alzheimer’s Detection  
 
-Signals recorded under eyes-open and eyes-closed conditions.
+---
 
-Difference signal computed to enhance condition-dependent neural activity.
+## EEG Frequency Bands
 
-𝑆
-𝑑
-𝑖
-𝑓
-𝑓
-(
-𝑡
-)
-=
-𝑆
-𝑜
-𝑝
-𝑒
-𝑛
-(
-𝑡
-)
-−
-𝑆
-𝑐
-𝑙
-𝑜
-𝑠
-𝑒
-𝑑
-(
-𝑡
-)
-S
-diff
-	​
+| Band | Frequency Range | Significance |
+|-----|----------------|-------------|
+| Delta | 0.5 – 4 Hz | Deep brain activity |
+| Theta | 4 – 8 Hz | Cognitive processing |
+| Alpha | 8 – 12 Hz | Relaxed state |
+| Beta | 12 – 32 Hz | Active thinking |
+| Gamma | 32 – 48 Hz | Higher cognitive functions |
 
-(t)=S
-open
-	​
+Alzheimer’s Disease typically causes slowing of EEG rhythms and reduced signal complexity.
 
-(t)−S
-closed
-	​
+---
 
-(t)
-2. Frequency Band Decomposition
+## Feature Extraction
 
-EEG signals were decomposed into five standard frequency bands using FIR band-pass filters designed in MATLAB:
+Hjorth Parameters extracted from each band:
 
-Band	Frequency Range
-Delta	0.5 – 4 Hz
-Theta	4 – 8 Hz
-Alpha	8 – 12 Hz
-Beta	12 – 32 Hz
-Gamma	32 – 48 Hz
-
-FIR filters were used due to:
-
-Linear phase response
-
-Stability
-
-Preservation of signal morphology
-
-Hardware implementation compatibility
-
-3. Feature Extraction
-
-Hjorth parameters were extracted from each frequency band:
-
-Activity → Signal power (variance)
-
-Mobility → Mean frequency characteristics
-
-Complexity → Signal structural complexity
+- Activity → Signal power (variance)
+- Mobility → Frequency characteristics
+- Complexity → Signal structural complexity
 
 Total features per subject:
 
-3 parameters × 5 bands = 15 features
+15 features (3 parameters × 5 bands)
 
-These features provide a compact and efficient representation of EEG signal characteristics.
+---
 
-4. Classification using Machine Learning
+## Machine Learning Model
 
-A Support Vector Machine (SVM) classifier was used for classification.
+Classifier used: Support Vector Machine (SVM)
 
 Validation method:
+- 10-fold cross-validation
 
-10-fold cross-validation
-
-Classifier advantages:
-
-High accuracy
-
-Good generalization
-
-Suitable for small datasets
-
-Results
-
-The proposed system achieved:
+Performance achieved:
 
 Accuracy: ~98.6%
 
-Key observations:
+---
 
-Alzheimer’s patients show increased low-frequency activity (Delta, Theta)
+## Repository Structure
 
-Reduced higher frequency activity (Alpha, Beta)
+EEG-Alzheimer-Detection/
 
-Altered signal complexity compared to healthy subjects
+│
 
-Tools and Technologies
+├── README.md
 
-MATLAB
+├── data/
 
-Digital Signal Processing (DSP)
+│   ├── raw/
 
-FIR Filter Design
+│   ├── processed/
 
-Feature Extraction
+│
 
-Machine Learning (SVM)
+├── matlab/
 
-Statistical Analysis
+│   ├── preprocessing.m
 
-System Workflow
+│   ├── bandpass_filter.m
 
-EEG Signal
-→ Preprocessing
-→ FIR Band-pass Filtering
-→ Feature Extraction (Hjorth Parameters)
-→ Feature Vector Formation
-→ SVM Classification
-→ Alzheimer’s Detection
+│   ├── feature_extraction.m
 
-Applications
+│   ├── hjorth_parameters.m
 
-Neurological disorder detection
+│   ├── svm_classifier.m
 
-Biomedical signal analysis
+│   ├── main.m
 
-DSP algorithm development
+│
 
-FPGA / hardware implementation of signal processing systems
+├── results/
 
-Clinical diagnostic support systems
+│   ├── plots/
 
-Key Learning Outcomes
+│   ├── accuracy_results.mat
 
-EEG signal processing and analysis
+│
 
-FIR filter design and implementation
+├── docs/
 
-Feature extraction techniques
+│   ├── project_report.pdf
 
-Machine learning classification
+│
 
-MATLAB-based DSP system design
+└── figures/
 
-End-to-end signal processing pipeline development
+    ├── eeg_signal.png
 
-Future Improvements
+    ├── frequency_bands.png
 
-FPGA implementation of filtering and feature extraction
+    ├── classification_results.png
 
-Real-time signal processing system
+---
 
-Deep learning-based classification
+## Tools and Technologies
 
-Larger dataset validation
+- MATLAB
+- Digital Signal Processing
+- FIR Filter Design
+- Machine Learning (SVM)
+- Statistical Feature Extraction
+
+---
+
+## Key DSP Techniques Used
+
+- FIR Band-pass Filtering
+- Frequency decomposition
+- Feature extraction from time-domain signals
+- Signal preprocessing and normalization
+- Machine learning classification
+
+---
+
+## Applications
+
+- Biomedical signal processing
+- Neurological disorder detection
+- DSP algorithm development
+- FPGA-based signal processing systems
+- Hardware implementation of DSP pipelines
+
+---
+
+## Future Improvements
+
+- FPGA implementation using Verilog
+- Real-time EEG processing system
+- Deep learning classification models
+- Larger dataset validation
+
+---
+
+## Author
+
+SK Mahammad Abdullah  
+B.E. Electronics and Instrumentation Engineering  
+Jadavpur University
